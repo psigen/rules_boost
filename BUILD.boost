@@ -1762,3 +1762,12 @@ boost_library(
         ":utility",
     ],
 )
+
+boost_library(
+    name = "graph",
+    deps = [
+        ":core",
+        ":regex",
+        ":serialization",
+    ],
+)
