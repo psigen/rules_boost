@@ -1767,6 +1767,7 @@ boost_library(
     name = "graph",
     deps = [
         ":core",
+        ":foreach",
         ":regex",
         ":serialization",
     ],
