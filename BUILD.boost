@@ -1741,6 +1741,13 @@ boost_library(
 )
 
 boost_library(
+    name = "xpressive",
+    deps = [
+        ":mpl",
+    ],
+)
+
+boost_library(
     name = "python",
     deps = [
         ":bind",
@@ -1760,6 +1767,7 @@ boost_library(
         ":tuple",
         ":type_traits",
         ":utility",
+        "@system_python//:python27-lib",
     ],
 )
 
@@ -1767,8 +1775,15 @@ boost_library(
     name = "graph",
     deps = [
         ":core",
+        ":detail",
         ":foreach",
+        ":iterator",
+        ":mpl",
+        ":numeric_conversion",
+        ":lexical_cast",
         ":regex",
+        ":type_traits",
         ":serialization",
+        ":xpressive",
     ],
 )
