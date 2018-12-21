@@ -287,12 +287,21 @@ boost_library(
 
 boost_library(
     name = "callable_traits",
-    deps = [
-    ],
 )
 
 boost_library(
     name = "call_traits",
+)
+
+# TODO: mark this as deprecated.
+boost_library(
+    name = "cast",
+    hdrs = [
+        "boost/polymorphic_cast.hpp",
+    ],
+    deps = [
+        ":numeric_conversion",
+    ]
 )
 
 boost_library(
@@ -1063,6 +1072,10 @@ boost_library(
 )
 
 boost_library(
+    name = "pending",
+)
+
+boost_library(
     name = "predef",
 )
 
@@ -1102,6 +1115,10 @@ boost_library(
         ":type_traits",
         ":version",
     ],
+)
+
+boost_library(
+    name = "property_map"
 )
 
 boost_library(
@@ -1339,6 +1356,7 @@ boost_library(
         "boost/enable_shared_from_this.hpp",
         "boost/make_shared.hpp",
         "boost/make_unique.hpp",
+        "boost/intrusive_ptr.hpp",
         "boost/pointer_to_other.hpp",
         "boost/weak_ptr.hpp",
     ],
@@ -1744,6 +1762,8 @@ boost_library(
     name = "xpressive",
     deps = [
         ":mpl",
+        ":proto",
+        ":implicit_cast",
     ],
 )
 
@@ -1751,12 +1771,15 @@ boost_library(
     name = "python",
     deps = [
         ":bind",
+        ":call_traits",
+        ":cast",
         ":config",
         ":conversion",
         ":core",
         ":detail",
         ":foreach",
         ":function",
+        ":implicit_cast",
         ":iterator",
         ":lexical_cast",
         ":mpl",
@@ -1767,23 +1790,39 @@ boost_library(
         ":tuple",
         ":type_traits",
         ":utility",
-        "@system_python//:python27-lib",
-    ],
+    ] + select({
+        "//:linux_x86_64": [
+            "@python_linux_x86_64//:python27-lib",
+        ],
+        "//:osx": [
+            "@python_osx//:python27-lib"
+        ],
+    }),
 )
 
 boost_library(
     name = "graph",
     deps = [
+        ":any",
+        ":algorithm",
         ":core",
         ":detail",
         ":foreach",
+        ":fusion",
         ":iterator",
-        ":mpl",
-        ":numeric_conversion",
         ":lexical_cast",
+        ":mpl",
+        ":multi_index",
+        ":numeric_conversion",
+        ":pending",
+        ":parameter",
+        ":property_map",
+        ":property_tree",
         ":regex",
-        ":type_traits",
         ":serialization",
+        ":type_traits",
+        ":typeof",
+        ":unordered",
         ":xpressive",
     ],
 )
